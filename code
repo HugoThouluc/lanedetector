@@ -31,7 +31,6 @@ def calculateLines(frame, lines):
     right = []
     for line in lines: #loop pour chaque ligne détecté
         # Passe d'un tableau 2D à 1D
-        print(line)
         x1, y1, x2, y2 = line.reshape(4)
         # Adapte un polynôme linéaire aux coordonnées x et y et renvoie un vecteur de coefficients
         parameters = np.polyfit((x1, x2), (y1, y2), 1)
@@ -69,13 +68,14 @@ def visualizeLines(frame, lines):
     # Vérifie si des lignes sont détectées
     for x1, y1, x2, y2 in lines:
     # Dessine des lignes entre deux coordonnées avec une couleur rouge et 5 d'épaisseur
-            cv2.line(linesVisualize, (x1, y1), (x2, y2), (0, 0, 255), 5)
+        cv2.line(linesVisualize, (x1, y1), (x2, y2), (0, 0, 255), 5)
+        print(x1, x2, y1, y2)
     return linesVisualize
 
 # Lecture de la video
-video = cv2.VideoCapture("solidWhiteRight.mp4")
+video = cv2.VideoCapture("challenge.mp4")
 while (video.isOpened()):
-    # ret = valeur bolléenne qui retourne l'obtention de l'image, fram = image en cours dans la vidéo
+    # ret = valeur boolléenne qui retourne l'obtention de l'image, fram = image en cours dans la vidéo
     ret, frame = video.read()
     blur = cv2.GaussianBlur(frame, (5, 5), 0)
     canny = cannyDetector(frame)
